@@ -19,10 +19,13 @@ export class DonutHttpComponent implements OnInit {
   constructor(private graphicsService: GraphicsService) { }
 
   ngOnInit(): void {
-
-    this.graphicsService.getUsersBySocialNetwork().subscribe((data) => {
-      const labels = Object.keys(data);
-      const values: number[] = Object.values(data);
+    // this.graphicsService.getUsersBySocialNetwork().subscribe((data) => {
+    //   const labels = Object.keys(data);
+    //   const values: number[] = Object.values(data);
+    //   this.doughnutChartData.labels = labels;
+    //   this.doughnutChartData.datasets.push({data: values});
+    // });
+    this.graphicsService.getInfoUsersBySocialNetwork().subscribe(({labels, values}) => {
       this.doughnutChartData.labels = labels;
       this.doughnutChartData.datasets.push({data: values});
     });
