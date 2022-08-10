@@ -1,1 +1,20 @@
-<p>donut-http works!</p>
+<h1>Usuarios por cada red social</h1>
+<hr>
+
+<div class="alert alert-info" *ngIf="doughnutChartData.datasets.length === 0; else divGrafica">
+    Cargando data...
+</div>
+
+<div class="row">
+    <div class="col">
+        <ng-template #divGrafica>
+            <div style="display: block">
+                <canvas baseChart
+                  [data]="doughnutChartData"        
+                  type="doughnut">
+                </canvas>
+            </div>
+        </ng-template>     
+        <span class="float-end text-primary">Información en billones de usuarios</span>  
+    </div>
+</div>

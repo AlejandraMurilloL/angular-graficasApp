@@ -1,4 +1,6 @@
 import { Component, OnInit } from '@angular/core';
+import { ChartData } from 'chart.js';
+import { GraphicsService } from '../../services/graphics.service';
 
 @Component({
   selector: 'app-donut-http',
@@ -8,9 +10,22 @@ import { Component, OnInit } from '@angular/core';
 })
 export class DonutHttpComponent implements OnInit {
 
-  constructor() { }
+  public doughnutChartLabels: string[] = [ ];
+  public doughnutChartData: ChartData<'doughnut'> = {
+    labels: this.doughnutChartLabels,
+    datasets: []
+  };
+
+  constructor(private graphicsService: GraphicsService) { }
 
   ngOnInit(): void {
+
+    this.graphicsService.getUsersBySocialNetwork().subscribe((data) => {
+      const labels = Object.keys(data);
+      const values: number[] = Object.values(data);
+      this.doughnutChartData.labels = labels;
+      this.doughnutChartData.datasets.push({data: values});
+    });
   }
 
 }
