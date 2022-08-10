@@ -1,4 +1,6 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, Input, ViewChild } from '@angular/core';
+import { ChartConfiguration, ChartData, ChartType } from 'chart.js';
+import { BaseChartDirective } from 'ng2-charts';
 
 @Component({
   selector: 'app-bar-graph',
@@ -6,11 +8,16 @@ import { Component, OnInit } from '@angular/core';
   styles: [
   ]
 })
-export class BarGraphComponent implements OnInit {
-
-  constructor() { }
-
-  ngOnInit(): void {
-  }
-
+export class BarGraphComponent  {
+  @ViewChild(BaseChartDirective) chart: BaseChartDirective | undefined;
+  @Input() barChartData: ChartData<'bar'> = {
+    labels: [],
+    datasets: []
+  };
+  
+  public barChartOptions: ChartConfiguration['options'] = {
+    responsive: true,
+  };
+  
+  public barChartType: ChartType = 'bar';  
 }
